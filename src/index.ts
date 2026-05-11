@@ -5,6 +5,7 @@ import "dotenv/config";
 
 import express from "express";
 import databaseService from "@/services/database.service";
+import authRouter from "@/routes/auth.route";
 
 const app = express();
 
@@ -12,9 +13,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("Threads API");
-});
+app.use("/api/auth", authRouter);
 
 async function startServer() {
     try {
