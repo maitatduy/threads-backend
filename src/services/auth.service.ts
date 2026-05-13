@@ -7,14 +7,6 @@ import { signAccessToken, signRefreshToken } from "@/utils/jwt";
 
 class AuthService {
     async register(payload: RegisterReqBody): Promise<RegisterResponse> {
-        const existingUser = await databaseService.users.findOne({
-            username: payload.username,
-        });
-
-        if (existingUser) {
-            throw new Error("Tên người dùng đã tồn tại!");
-        }
-
         const hashedPassword = await bcrypt.hash(payload.password, 10);
 
         const result = await databaseService.users.insertOne(
