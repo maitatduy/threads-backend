@@ -95,8 +95,9 @@ export const registerValidator = checkSchema({
         },
 
         matches: {
-            options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-            errorMessage: "Mật khẩu chỉ chứa chữ cái viết hoa, viết thường và chữ số!",
+            options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,50}$/,
+            errorMessage:
+                "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ hoa, 1 chữ số và 1 ký tự đặc biệt!",
         },
     },
 
@@ -181,8 +182,9 @@ export const loginValidator = checkSchema({
         },
 
         matches: {
-            options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-            errorMessage: "Mật khẩu chỉ chứa chữ cái viết hoa, viết thường và chữ số!",
+            options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,50}$/,
+            errorMessage:
+                "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ hoa, 1 chữ số và 1 ký tự đặc biệt!",
         },
     },
 });
