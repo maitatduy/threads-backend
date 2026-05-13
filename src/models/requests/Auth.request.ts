@@ -11,6 +11,4 @@ export interface RegisterReqBody {
 
     password: string;
     password_confirmation: string;
-
-    url_target: string;
 }
