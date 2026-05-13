@@ -12,3 +12,8 @@ export interface RegisterReqBody {
     password: string;
     password_confirmation: string;
 }
+
+export interface LoginReqBody {
+    username: string;
+    password: string;
+}

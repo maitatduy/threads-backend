@@ -1,5 +1,5 @@
-import { RegisterReqBody } from "@/models/requests/Auth.request";
-import { RegisterResponse } from "@/models/responses/Auth.response";
+import { LoginReqBody, RegisterReqBody } from "@/models/requests/Auth.request";
+import { LoginResponse, RegisterResponse } from "@/models/responses/Auth.response";
 import User from "@/models/database/User";
 import databaseService from "@/services/database.service";
 import bcrypt from "bcrypt";
@@ -22,6 +22,27 @@ class AuthService {
             user_id,
             username: payload.username,
             email: payload.email,
+        };
+
+        const access_token = signAccessToken(tokenPayload);
+        const refresh_token = signRefreshToken(tokenPayload);
+
+        return {
+            access_token,
+            refresh_token,
+            token_type: "Bearer",
+        };
+    }
+
+    async login(payload: LoginReqBody): Promise<LoginResponse> {
+        const user = await databaseService.users.findOne({
+            username: payload.username,
+        });
+
+        const tokenPayload = {
+            user_id: user!._id?.toString(),
+            username: user!.username,
+            email: user!.email,
         };
 
         const access_token = signAccessToken(tokenPayload);
